@@ -1,20 +1,44 @@
-import Form from "./Form.jsx";
+import background from "../images/background.png";
+import logocard from "../images/logocard.png";
 
 export default function Index() {
   return (
-    <section className="max-w-6xl mx-auto px-4 py-10">
-      <h1 className="text-4xl font-extrabold text-white">Home</h1>
-      <p className="text-slate-300 mt-2">Bienvenida a Aquelarre (React + Vite + Tailwind).</p>
+    <section
+      className="min-h-screen flex items-center justify-center px-4 py-10"
+      style={{
+        backgroundImage: `url(${background})`,
+        backgroundSize: "contain",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="w-full flex justify-center">
+        <div className="w-fit bg-black/50 rounded-2xl px-6 py-5 ">
+          <div className="mt-6 flex items-center justify-center gap-6">
+            <div className="rotate-[-8deg]">
+              <div
+                className="w-28 h-44 rounded-xl shadow-xl bg-center bg-no-repeat bg-cover animate-bounce border border-[#c9a24d]/30"
+                style={{ backgroundImage: `url(${logocard})` }}
+              />
 
-      <div className="mt-8 grid md:grid-cols-2 gap-6">
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-          <h2 className="text-xl font-bold text-white">Acción rápida</h2>
-          <p className="text-slate-300 mt-2">
-            Aquí irá una intro o CTA (selección de cartas, etc.)
-          </p>
+            </div>
+
+            <div className="rotate-[0deg]">
+              <div
+                className="w-28 h-44 rounded-xl shadow-xl bg-center bg-no-repeat bg-cover animate-bounce border border-[#c9a24d]/30"
+                 style={{ backgroundImage: `url(${logocard})` }}
+              />
+            </div>
+
+            <div className="rotate-[8deg]">
+              <div
+                className="w-28 h-44 rounded-xl shadow-xl bg-center bg-no-repeat bg-cover animate-bounce border border-[#c9a24d]/30"
+                style={{ backgroundImage: `url(${logocard})` }}
+              />
+    
+            </div>
+          </div>
         </div>
-
-        <Form />
       </div>
     </section>
   );
