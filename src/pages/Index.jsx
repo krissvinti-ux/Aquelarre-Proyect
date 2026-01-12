@@ -1,4 +1,4 @@
-import Form from "./Form.jsx";
+import Registrer from "./Registrer.jsx"; 
 
 export default function Index() {
   return (
@@ -13,8 +13,7 @@ export default function Index() {
             Aquí irá una intro o CTA (selección de cartas, etc.)
           </p>
         </div>
-
-        <Form />
+        <Registrer /> 
       </div>
     </section>
   );

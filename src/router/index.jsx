@@ -1,10 +1,9 @@
 import { createBrowserRouter } from 'react-router';
 import Index from '../pages/Index';
-import Form from '../pages/Form'; 
 import CardSelection from '../pages/Cardselection';
-import CardReading from '../pages/Cardreading';
+import CardReading from '../pages/Cardreading'; 
 import ReadingHistory from '../pages/Readinghistory';
-import Registrer from '../pages/Registrer';
+import Registrer from '../pages/Registrer'; 
 import Layout from '../layout/Layout';
 
 export const router = createBrowserRouter([
@@ -19,10 +18,6 @@ export const router = createBrowserRouter([
       {
         path: "register",
         Component: Registrer, 
-      },
-      {
-        path: "old-form",
-        Component: Form,
       },
       {
         path: "card-selection", 
