@@ -3,8 +3,6 @@ import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import Index from "./pages/Index.jsx";
 import CardSelection from "./pages/CardSelection.jsx";
-import CardReading from "./pages/CardReading.jsx";
-
 
 export default function App() {
   return (
@@ -14,11 +12,10 @@ export default function App() {
       <main className="flex-grow-1">
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/card-selection" element={<CardSelection />} />
-          <Route path="/card-reading" element={<CardReading />} />
-          {/* si aún no tienes CardReading, usa esto:
+          <Route path="/card-selection" element={<CardSelection />} />          
+          {/* si aún no tienes CardReading, usa esto: */}
           <Route path="/card-reading" element={<div className="text-white p-4">CardReading pendiente</div>} />
-          */}
+          
         </Routes>
       </main>
 
