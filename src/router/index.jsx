@@ -1,37 +1,36 @@
+import { createBrowserRouter } from 'react-router';
 import Index from '../pages/Index';
-// import Form from '../pages/Form'; 
-import CardSelection from '../pages/Cardselection'
-import CardReading from '../pages/Cardreading'
-import ReadingHistory from '../pages/Readinghistory'
-import Layout from '../layout/Layout'
-import {createBrowserRouter} from 'react-router'
+import Form from '../pages/Form'; 
+import CardSelection from '../pages/Cardselection';
+import CardReading from '../pages/Cardreading';
+import ReadingHistory from '../pages/Readinghistory';
+import Layout from '../layout/Layout';
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component: Layout,
+    Component: Layout, 
     children: [
-        { 
-            index: true, 
-            Component: Index, 
-        },
-        // {
-        //     path: "/form",
-        //     Component: Form,
-        // },
-        {
-            path: "/cardselection",
-            Component: CardSelection,
-        },
-        {
-            path: "/cardreading",
-            Component: CardReading,
-        },
-        {
-            path: "/readinghistory",
-            Component: ReadingHistory,
-        }
-
+      { 
+        index: true, 
+        Component: Index, 
+      },
+      {
+        path: "register", 
+        Component: Form,
+      },
+      {
+        path: "card-selection", 
+        Component: CardSelection,
+      },
+      {
+        path: "card-reading", 
+        Component: CardReading,
+      },
+      {
+        path: "historial", 
+        Component: ReadingHistory,
+      }
     ]
   }
 ]);
