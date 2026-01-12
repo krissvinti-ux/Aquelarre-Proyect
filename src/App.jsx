@@ -8,15 +8,10 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-black flex flex-col">
-        {}
         <Navbar />
-
-        {}
         <main className="flex-1 p-10 text-white flex justify-center items-center">
           <Registrer />
         </main>
-
-        {}
         <Footer />
       </div>
     </BrowserRouter>
