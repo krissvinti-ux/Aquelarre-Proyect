@@ -1,18 +1,28 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
-import Index from "./pages/Index.jsx"; // ajusta si tu ruta es distinta
+import Index from "./pages/Index.jsx";
+import CardSelection from "./pages/CardSelection.jsx";
+import CardReading from "./pages/CardReading.jsx";
+
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <div className="min-h-screen bg-black flex flex-col">
-        <Navbar />
-        <main className="flex-1">
-          <Index />
-        </main>
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <div className="d-flex flex-column min-vh-100 bg-dark">
+      <Navbar />
+
+      <main className="flex-grow-1">
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/card-selection" element={<CardSelection />} />
+          <Route path="/card-reading" element={<CardReading />} />
+          {/* si aún no tienes CardReading, usa esto:
+          <Route path="/card-reading" element={<div className="text-white p-4">CardReading pendiente</div>} />
+          */}
+        </Routes>
+      </main>
+
+      <Footer />
+    </div>
   );
 }
