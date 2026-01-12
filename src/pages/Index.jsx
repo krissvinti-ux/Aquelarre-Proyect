@@ -1,4 +1,6 @@
-import Registrer from "./Registrer.jsx"; 
+import Registrer from "./Registrer.jsx";
+import background from "../images/background.png";
+import logocard from "../images/logocard.png"; 
 
 export default function Index() {
   return (
@@ -36,8 +38,7 @@ export default function Index() {
               />
             </div>
           </div>
-        </div>
-        <Registrer /> 
+        </div>        
       </div>
     </section>
   );
