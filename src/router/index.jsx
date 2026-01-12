@@ -4,6 +4,7 @@ import Form from '../pages/Form';
 import CardSelection from '../pages/Cardselection';
 import CardReading from '../pages/Cardreading';
 import ReadingHistory from '../pages/Readinghistory';
+import Registrer from '../pages/Registrer';
 import Layout from '../layout/Layout';
 
 export const router = createBrowserRouter([
@@ -16,7 +17,11 @@ export const router = createBrowserRouter([
         Component: Index, 
       },
       {
-        path: "register", 
+        path: "register",
+        Component: Registrer, 
+      },
+      {
+        path: "old-form",
         Component: Form,
       },
       {
