@@ -1,15 +1,15 @@
 .registration-screen {
-  background-color: #030303; /* Negro de tu paleta */
+  background-color: #030303; 
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #D4AF37; /* Dorado de tu paleta */
+  color: #D4AF37; 
   font-family: 'Cormorant Garamond', serif;
 }
 
 .registration-box {
-  border: 2px solid #D4AF37; /* Borde dorado */
+  border: 2px solid #D4AF37; 
   padding: 50px;
   background: rgba(3, 3, 3, 0.9);
   width: 450px;
@@ -37,9 +37,9 @@
 }
 
 .input-group input {
-  background: rgba(142, 122, 181, 0.1); /* Basado en tu lila #8E7AB5 */
+  background: rgba(142, 122, 181, 0.1); 
   border: 1px solid #D4AF37;
-  color: #F4F1DE; /* Crema de tu paleta */
+  color: #F4F1DE; 
   padding: 12px;
   width: 100%;
   font-family: 'Cormorant Garamond', serif;
@@ -47,8 +47,8 @@
 }
 
 .read-fortune-btn {
-  background-color: #3A1F5D; /* Morado de tu paleta */
-  color: #F4F1DE; /* Crema */
+  background-color: #3A1F5D; 
+  color: #F4F1DE; 
   border: 1px solid #D4AF37;
   padding: 15px 30px;
   border-radius: 30px;
@@ -62,4 +62,17 @@
 .read-fortune-btn:hover {
   background-color: #D4AF37;
   color: #030303;
+}
+
+.registration-screen {
+  background-color: #030303; 
+  font-family: 'Cormorant Garamond', serif; 
+  color: #D4AF37; 
+}
+
+.read-fortune-btn {
+  background-color: #3A1F5D; 
+  font-family: 'Cormorant Garamond', serif;
+  border: 1px solid #D4AF37;
+  color: #F4F1DE; 
 }
