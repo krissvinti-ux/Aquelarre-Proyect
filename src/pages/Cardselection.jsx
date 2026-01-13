@@ -60,17 +60,23 @@ export default function CardSelection() {
                 if (c.clowCard.trim() === "") continue;
 
                 list.push({
+                    id: c.id,
                     cardNumber: c.cardNumber,
                     spanishName: c.spanishName,
                     clowCard: c.clowCard,
                 });
             }
-
+         
             if (list.length < 3) {
                 throw new Error("No hay suficientes cartas para escoger 3.");
             }
             const random3 = pick3Random(list);
             setApiCards(random3);
+
+             localStorage.setItem(
+                "Cardsnumber",
+                JSON.stringify(random3.map(c => c.cardNumber))
+            );
 
             setTimeout(() => {
                 setRevealed([true, true, true]);
