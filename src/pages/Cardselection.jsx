@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import background from "../images/background.png";
 import logocard from "../images/logocard.png";
 
 export default function CardSelection() {
+
+    const navigate = useNavigate();
     const API_URL = "https://6388b6e5a4bb27a7f78f96a5.mockapi.io/sakura-cards/";
 
     const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -66,14 +69,14 @@ export default function CardSelection() {
                     clowCard: c.clowCard,
                 });
             }
-         
+
             if (list.length < 3) {
                 throw new Error("No hay suficientes cartas para escoger 3.");
             }
             const random3 = pick3Random(list);
             setApiCards(random3);
 
-             localStorage.setItem(
+            localStorage.setItem(
                 "Cardsnumber",
                 JSON.stringify(random3.map(c => c.cardNumber))
             );
@@ -89,7 +92,7 @@ export default function CardSelection() {
         setLoading(false);
     }
     function interpretar() {
-        console.log("Interpretar:", apiCards);
+        navigate("/card-reading");
     }
     return (
         <section
@@ -102,57 +105,56 @@ export default function CardSelection() {
             }}
         >
             <div className="p-6 rounded-xl w-full max-w-5xl">
-                <h1 className="text-2xl mb-4 text-center font-serif text-[#c9a24d]">
+                <h1 className="text-2xl mb-4 text-center bg-black font-serif text-[#c9a24d]">
                     Choose three cards
                 </h1>
 
                 <div className="relative w-full max-w-6xl h-80 md:h-96 mx-auto mb-8">
-  {cards.map((id, idx) => {
-    const pos = selected.indexOf(id);
+                    {cards.map((id, idx) => {
+                        const pos = selected.indexOf(id);
 
-    // Ajustes del abanico
-    const maxAngle = 28;
-    const radius = 240;
-    const topBase = 10;
-    const spread = 2.45;
+                        const maxAngle = 28;
+                        const radius = 240;
+                        const topBase = 10;
+                        const spread = 2.45;
 
-    const t = cards.length === 1 ? 0 : (idx / (cards.length - 1)) * 2 - 1;
-    const angle = t * maxAngle;
-    const rad = (angle * Math.PI) / 180;
+                        const t = cards.length === 1 ? 0 : (idx / (cards.length - 1)) * 2 - 1;
+                        const angle = t * maxAngle;
+                        const rad = (angle * Math.PI) / 180;
 
-    const x = Math.sin(rad) * radius * spread;
-    const y = (1 - Math.cos(rad)) * radius * 0.9;
+                        const x = Math.sin(rad) * radius * spread;
+                        const y = (1 - Math.cos(rad)) * radius * 0.9;
 
-    const zIndex = 1000 - Math.abs(Math.round(angle));
+                        const zIndex = 1000 - Math.abs(Math.round(angle));
 
-    return (
-      <div
-        key={id}
-        onClick={() => selectCard(id)}
-        className={`absolute w-32 h-48 md:w-44 md:h-64 rounded-xl cursor-pointer
+                        return (
+                            <div
+                                key={id}
+                                onClick={() => selectCard(id)}
+                                className={`absolute w-32 h-48 md:w-44 md:h-64 rounded-xl cursor-pointer
           ${pos !== -1 ? "ring-2 ring-amber-400" : ""}
         `}
-        style={{
-          left: "50%",
-          top: topBase,
-          zIndex,
-          backgroundImage: `url(${logocard})`,
-          backgroundSize: "contain",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          transform: `translateX(-50%) translateX(${x}px) translateY(${y}px) rotate(${angle}deg)`,
-          transformOrigin: "50% 90%",
-        }}
-      >
-        {pos !== -1 && (
-          <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded-full">
-            {labels[pos]}
-          </span>
-        )}
-      </div>
-    );
-  })}
-</div>
+                                style={{
+                                    left: "50%",
+                                    top: topBase,
+                                    zIndex,
+                                    backgroundImage: `url(${logocard})`,
+                                    backgroundSize: "contain",
+                                    backgroundRepeat: "no-repeat",
+                                    backgroundPosition: "center",
+                                    transform: `translateX(-50%) translateX(${x}px) translateY(${y}px) rotate(${angle}deg)`,
+                                    transformOrigin: "50% 90%",
+                                }}
+                            >
+                                {pos !== -1 && (
+                                    <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded-full">
+                                        {labels[pos]}
+                                    </span>
+                                )}
+                            </div>
+                        );
+                    })}
+                </div>
                 <button
                     onClick={readMyFortune}
                     disabled={selected.length !== 3 || loading}
@@ -175,7 +177,6 @@ export default function CardSelection() {
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
                                 {apiCards.map((c, i) => (
                                     <div key={i} className="flex flex-col items-center">
-
                                         <div className="flip-card w-48 h-80">
                                             <div className={`flip-inner ${revealed[i] ? "flipped" : ""}`}>
                                                 <div className="flip-face">
@@ -185,7 +186,6 @@ export default function CardSelection() {
                                                         className="w-full h-full object-contain"
                                                     />
                                                 </div>
-
                                                 <div className="flip-face flip-front">
                                                     <img
                                                         src={c.clowCard}
@@ -195,16 +195,6 @@ export default function CardSelection() {
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <p className="text-white mt-3 text-sm">
-                                            <span className="text-white/70 font-serif">cardNumber:</span>{" "}
-                                            <span className="font-semibold">{c.cardNumber}</span>
-                                        </p>
-
-                                        <p className="text-white text-sm">
-                                            <span className="text-white/70 font-serif">spanishName:</span>{" "}
-                                            <span className="font-semibold">{c.spanishName}</span>
-                                        </p>
                                     </div>
                                 ))}
                             </div>

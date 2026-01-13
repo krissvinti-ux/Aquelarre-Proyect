@@ -1,10 +1,11 @@
 import { createBrowserRouter } from 'react-router';
 import Index from '../pages/Index';
 import CardSelection from '../pages/Cardselection';
-import CardReading from '../pages/Cardreading'; 
+import CardReading from '../pages/CardReading'; 
 import ReadingHistory from '../pages/Readinghistory';
 import Registrer from '../pages/Registrer'; 
 import Layout from '../layout/Layout';
+
 
 export const router = createBrowserRouter([
   {
