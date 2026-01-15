@@ -112,6 +112,40 @@ body {
     opacity 0.4s ease;
 }
 
+/* BOTONES */
+
+.buttons-container {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.gold-button {
+  background: linear-gradient(135deg, #D4AF37, #b8962e);
+  color: #1a1a1a;
+  border: none;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(212, 175, 55, 0.4);
+}
+
+.gold-button:hover {
+  background: linear-gradient(135deg, #e6c75a, #d4af37);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(212, 175, 55, 0.6);
+}
+
+.gold-button:active {
+  transform: scale(0.97);
+}
+
+
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .cards-grid {
@@ -122,7 +156,3 @@ body {
     height: 320px;
   }
 }
-
-
-
-

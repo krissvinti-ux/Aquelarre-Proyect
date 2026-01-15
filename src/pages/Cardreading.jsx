@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./cardReading.css";
 
+
 export default function CardReading() {
+  const navigate = useNavigate();
+
   const [cards, setCards] = useState({
+
     past: null,
     present: null,
     future: null,
   });
+  const [usuario, setUsuario] = useState('');
+
 
   const [cardIds, setCardIds] = useState([]);
 
@@ -79,7 +86,13 @@ export default function CardReading() {
   }
 }, []);
 
-  
+  useEffect(() => {
+  const nombreGuardado = localStorage.getItem("nombreUsuario");
+  if (nombreGuardado) {
+    setUsuario(nombreGuardado);
+  }
+}, []);
+
   useEffect(() => {
     if (cardIds.length !== 3) return; 
 
@@ -122,8 +135,9 @@ export default function CardReading() {
   return (
     <div className="card-reading-container">
       <h1 className="intro-message">
-        The cards are ready to reflect your path
+        {usuario ? `${usuario}, the cards are ready to reflect your path` : "The cards are ready to reflect your path"}
       </h1>
+
 
       <div className="cards-grid">
         {cards.past && cards.present && cards.future && (
@@ -161,8 +175,16 @@ export default function CardReading() {
               </p>
             </div>
           </>
+          
         )}
       </div>
+      <div className="buttons-container">
+          <button className="gold-button" onClick={() => navigate("/card-selection")}> New Reading</button>
+          
+          <button className="gold-button" onClick={() => navigate("/historial")}>Save Reading</button>
+          <button className="gold-button" onClick={() => navigate("/historial")}> See reading history</button>
+      </div>
+
     </div>
   );
 }
