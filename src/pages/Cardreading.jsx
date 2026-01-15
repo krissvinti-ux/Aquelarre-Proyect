@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./cardReading.css";
 
 export default function CardReading() {
-  const navigate = useNavigate();
-  const [nombreUsuario, setNombreUsuario] = useState("");
-  const [cards, setCards] = useState({ past: null, present: null, future: null });
+  const [cards, setCards] = useState({
+    past: null,
+    present: null,
+    future: null,
+  });
+
   const [cardIds, setCardIds] = useState([]);
 
   const translationMap = {
@@ -27,9 +29,9 @@ export default function CardReading() {
     "Representa la confusión, lo difuso.": "represents confusion and vagueness.",
     "Simboliza el caos, los problemas.": "symbolizes chaos and problems.",
     " Simboliza la capacidad de tener una visión general sobre algo, o de evadirse de un problema.": "symbolizes the ability to have an overall view of something or to escape from a problem.",
-    "Representa la disappearance, el olvido.": "represents disappearance and oblivion.",
+    "Representa la desaparición, el olvido.": "represents disappearance and oblivion.",
     "Esta carta simboliza la iluminación.": "symbolizes enlightenment.",
-    "Simboliza un cambio, un movement.": "symbolizes change and movement.",
+    "Simboliza un cambio, un movimiento.": "symbolizes change and movement.",
     "Simboliza la destreza y la lucha.": "symbolizes skill and struggle.",
     "Simboliza la continuidad, la perseverancia, una prisión.": "symbolizes continuity, perseverance, and a prison.",
     "Simboliza la paralización, el despiste, el descanso.": "symbolizes paralysis, distraction, and rest.",
@@ -58,68 +60,110 @@ export default function CardReading() {
     " Simboliza el futuro, la adivinación, los sueños premonitorios.": "symbolizes the future, divination, and prophetic dreams.",
     "Simboliza la seguridad y la tranquilidad.": "symbolizes safety and tranquility.",
     "Simboliza lo oculto, lo que aún está por descubrir, la ventaja.": "symbolizes the hidden, what is yet to be discovered, and advantage.",
-    "Simboliza la claridad, la revelation, un futuro brillante.": "symbolizes clarity, revelation, and a bright future.",
+    "Simboliza la claridad, la revelación, un futuro brillante.": "symbolizes clarity, revelation, and a bright future.",
     " Simbolizan la dualidad, la compañía, la multiplicación.": "symbolize duality, companionship, and multiplication.",
     "Simboliza la solidez, la sujeción y la vida.": "symbolizes solidity, restraint, and life.",
-    " Representa el amor and amistad.": "represents love and friendship.",
+    " Representa el amor y la amistad.": "represents love and friendship.",
     "Simboliza el espacio vacío, la nada, lo negativo.": "symbolizes empty space, nothingness, and negativity.",
     "Simboliza la esperanza de un amor.": "symbolizes the hope of love."
   };
 
-  const translateMeaningToEnglish = (meaning) => translationMap[meaning] || meaning;
-
-  useEffect(() => {
-    setNombreUsuario(localStorage.getItem("nombreUsuario") || "Seeker");
-    const storedNumbers = localStorage.getItem("Cardsnumber");
-    if (storedNumbers) setCardIds(JSON.parse(storedNumbers));
-  }, []);
-
-  const handleGuardarHistorial = () => {
-    const historialPrevio = JSON.parse(localStorage.getItem("historialTarot") || "[]");
-    const textoTirada = `Past: ${cards.past.name}. Present: ${cards.present.name}. Future: ${cards.future.name}.`;
-    const nuevaLectura = {
-      id: Date.now(),
-      numeroTirada: historialPrevio.length + 1,
-      nombre: nombreUsuario,
-      fecha: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
-      tirada: textoTirada
-    };
-    localStorage.setItem("historialTarot", JSON.stringify([nuevaLectura, ...historialPrevio]));
-    navigate("/historial");
+  const translateMeaningToEnglish = (meaning) => {
+    return translationMap[meaning] || meaning;
   };
 
   useEffect(() => {
+    const storedNumbers = localStorage.getItem("Cardsnumber");
+    if (storedNumbers) {
+      setCardIds(JSON.parse(storedNumbers));
+  }
+}, []);
+
+  
+  useEffect(() => {
     if (cardIds.length !== 3) return; 
+
     const fetchCards = async () => {
       try {
-        const responses = await Promise.all(cardIds.map((id) => fetch(`https://6388b6e5a4bb27a7f78f96a5.mockapi.io/sakura-cards/${id}`).then((res) => res.json())));
-        setCards({
-          past: { image: responses[0].clowCard, name: responses[0].englishName, meaning: translateMeaningToEnglish(responses[0].meaning) },
-          present: { image: responses[1].clowCard, name: responses[1].englishName, meaning: translateMeaningToEnglish(responses[1].meaning) },
-          future: { image: responses[2].clowCard, name: responses[2].englishName, meaning: translateMeaningToEnglish(responses[2].meaning) },
-        });
-      } catch (error) { console.error("Error:", error); }
+        const responses = await Promise.all(
+          cardIds.map((id) =>
+            fetch(`https://6388b6e5a4bb27a7f78f96a5.mockapi.io/sakura-cards/${id}`)
+              .then((res) => res.json())
+          )
+        );
+
+        const mappedCards = {
+          past: {
+            image: responses[0].clowCard,
+            name: responses[0].englishName,
+            meaning: translateMeaningToEnglish(responses[0].meaning),
+          },
+          present: {
+            image: responses[1].clowCard,
+            name: responses[1].englishName,
+            meaning: translateMeaningToEnglish(responses[1].meaning),
+          },
+          future: {
+            image: responses[2].clowCard,
+            name: responses[2].englishName,
+            meaning: translateMeaningToEnglish(responses[2].meaning),
+          },
+        };
+
+        setCards(mappedCards);
+      } catch (error) {
+        console.error("Error fetching cards:", error);
+      }
     };
+
     fetchCards();
   }, [cardIds]); 
 
   return (
     <div className="card-reading-container">
-      <h1 className="intro-message">{nombreUsuario.toUpperCase()}, the cards are ready</h1>
+      <h1 className="intro-message">
+        The cards are ready to reflect your path
+      </h1>
+
       <div className="cards-grid">
         {cards.past && cards.present && cards.future && (
           <>
-            <div className="clow-card past"><h3>PAST</h3><img src={cards.past.image} alt="" /><h4>{cards.past.name}</h4><p>{cards.past.meaning}</p></div>
-            <div className="clow-card present"><h3>PRESENT</h3><img src={cards.present.image} alt="" /><h4>{cards.present.name}</h4><p>{cards.present.meaning}</p></div>
-            <div className="clow-card future"><h3>FUTURE</h3><img src={cards.future.image} alt="" /><h4>{cards.future.name}</h4><p>{cards.future.meaning}</p></div>
+            <div className="clow-card past">
+              <h3>PAST</h3>
+              <div className="card-image">
+                <img src={cards.past.image} alt={cards.past.name} />
+              </div>
+              <h4 className="card-name">{cards.past.name}</h4>
+              <p className="message">
+                {`Your past with ${cards.past.name} ${cards.past.meaning}`}
+              </p>
+            </div>
+
+            <div className="clow-card present">
+              <h3>PRESENT</h3>
+              <div className="card-image">
+                <img src={cards.present.image} alt={cards.present.name} />
+              </div>
+              <h4 className="card-name">{cards.present.name}</h4>
+              <p className="message">
+                {`The present with ${cards.present.name} ${cards.present.meaning}`}
+              </p>
+            </div>
+
+            <div className="clow-card future">
+              <h3>FUTURE</h3>
+              <div className="card-image">
+                <img src={cards.future.image} alt={cards.future.name} />
+              </div>
+              <h4 className="card-name">{cards.future.name}</h4>
+              <p className="message">
+                {`Your future with ${cards.future.name} ${cards.future.meaning}`}
+              </p>
+            </div>
           </>
         )}
       </div>
-      {cards.future && (
-        <button onClick={handleGuardarHistorial} style={{backgroundColor: '#c9a24d', color: 'black', padding: '15px 30px', margin: '40px auto', display: 'block', fontWeight: 'bold', cursor: 'pointer'}}>
-          SAVE TO HISTORY
-        </button>
-      )}
     </div>
   );
 }
+
