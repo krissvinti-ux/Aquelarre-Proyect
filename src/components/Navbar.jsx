@@ -15,31 +15,17 @@ export default function Navbar({ variant }) {
             src={moonLogo}
             alt="Aquelarre logo"
             className="
-              absolute 
-              right-[-65px] 
-              top-[60%] 
-              -translate-y-1/2 
-              h-20 w-20 
-              md:h-48 md:w-48 
-              object-cover 
-              rounded-full 
-              opacity-90 
-              mix-blend-screen 
-              z-0 
-              transition-transform 
-              group-hover:scale-110
+              absolute right-[-65px] top-[60%] -translate-y-1/2 h-20 w-20 md:h-48 md:w-48 object-cover rounded-full opacity-90  mix-blend-screen z-0 transition-transform group-hover:scale-110
             "
           />
         </Link>
 
         <div className="flex items-center gap-8">
           {variant === "history" ? (
-
             <>
               <button
                 className="font-serif text-lg md:text-xl text-[#c9a24d] hover:text-[#e2c36a] transition"
                 onClick={() => {
-
                   window.location.href = "/";
                 }}
               >
@@ -54,7 +40,7 @@ export default function Navbar({ variant }) {
               </Link>
             </>
           ) : (
-            /* Para (SIGN IN / REGISTER) */
+
             <>
               <NavLink
                 to="/signin"

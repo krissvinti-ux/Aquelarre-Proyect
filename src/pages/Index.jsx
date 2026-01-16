@@ -14,7 +14,7 @@ export default function Index() {
       }}
     >
       <div className="w-full flex justify-center">
-        <div className="  rounded-2xl px-6 py-5 ">
+        <div className="rounded-2xl px-6 py-5 ">
           <div className="mt-6 flex items-center justify-center gap-6">
 
             <div className="rotate-[-8deg]">

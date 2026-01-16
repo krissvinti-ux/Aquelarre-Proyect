@@ -131,9 +131,7 @@ export default function CardSelection() {
                             <div
                                 key={id}
                                 onClick={() => selectCard(id)}
-                                className={`absolute w-32 h-48 md:w-44 md:h-64 rounded-xl cursor-pointer
-          ${pos !== -1 ? "ring-2 ring-amber-400" : ""}
-        `}
+                                className={`absolute w-32 h-48 md:w-44 md:h-64 rounded-xl cursor-pointer ${pos !== -1 ? "ring-2 ring-amber-400" : ""} `}
                                 style={{
                                     left: "50%",
                                     top: topBase,
@@ -147,7 +145,7 @@ export default function CardSelection() {
                                 }}
                             >
                                 {pos !== -1 && (
-                                    <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded-full">
+                                    <span className="absolute-top-2 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded-full">
                                         {labels[pos]}
                                     </span>
                                 )}
