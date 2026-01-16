@@ -13,7 +13,7 @@ Flujo principal de navegación dentro de la aplicación:
 
 2. **Register (Formulario de registro)**
    - El usuario ingresa su **nombre**.
-   - Al hacer clic en **Guardar / Continuar**, la app lo redirige al **tablero de lectura**.
+   - Al hacer clic en el botón **Read my fortune**, la app lo redirige al **tablero de lectura**.
 
 3. **Tablero de lectura (Card Selection)**
    - El usuario selecciona **exactamente 3 cartas** (**Presente / Pasado / Futuro**).
