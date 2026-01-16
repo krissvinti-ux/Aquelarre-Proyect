@@ -9,7 +9,7 @@ export default function CardSelection() {
     const API_URL = "https://6388b6e5a4bb27a7f78f96a5.mockapi.io/sakura-cards/";
 
     const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    const labels = ["Presente", "Pasado", "Futuro"];
+    const labels = ["Present", "Past", "Future"];
     const [selected, setSelected] = useState([]);
     const [showResults, setShowResults] = useState(false);
     const [loading, setLoading] = useState(false);

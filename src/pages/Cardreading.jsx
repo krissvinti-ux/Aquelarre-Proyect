@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./cardReading.css";
 
+
 export default function CardReading() {
+  const navigate = useNavigate();
+
   const [cards, setCards] = useState({
+
     past: null,
     present: null,
     future: null,
   });
+  const [usuario, setUsuario] = useState('');
 
   const [cardIds, setCardIds] = useState([]);
 
@@ -23,7 +29,7 @@ export default function CardReading() {
     "Simboliza la parálisis, la energía.": "symbolizes paralysis and energy.",
     "Representa el ataque, la agresión.": "represents attack and aggression.",
     " Representa la salud, el comienzo de un amor, o el florecimiento de algo.": "represents health, the beginning of love, or the blossoming of something.",
-    "Simboliza la protección, tanto personal como de algo que consideremos valioso.": "symbolizes protection, both personal and of something we consider valuable.",
+    "Simboliza la protección, tanto personal como de algo que nosotros consideremos muy valioso.": "symbolizes protection, both personal and of something we consider valuable.",
     " Simboliza el paso del tiempo, su escasez.": "symbolizes the passage of time and its scarcity.",
     " Esta carta simboliza la superación de obstáculos.": "this card symbolizes overcoming obstacles.",
     "Representa la confusión, lo difuso.": "represents confusion and vagueness.",
@@ -42,7 +48,7 @@ export default function CardReading() {
     "Simboliza la repetición de algo pasado, el mirar hacia atrás.": "symbolizes repetition of the past and looking back.",
     "Representa la agresión.": "represents aggression.",
     "Simboliza la dulzura, la infancia, la protección de nuestros padres.": "symbolizes sweetness, childhood, and parental protection.",
-    "Simboliza la velocidad, los reflejos, la capacidad de actuar rápidamente.": "symbolizes speed, reflexes, and the ability to act quickly.",
+    "Simboliza la velocidad, los reflejos, la capacidad de actuar rápidamente": "symbolizes speed, reflexes, and the ability to act quickly.",
     "Esta carta simboliza el crecimiento, el avance, el éxito.": "this card symbolizes growth, progress, and success.",
     "Simboliza la creación, la imaginación, el desafío.": "symbolizes creation, imagination, and challenge.",
     "Simboliza cambio, apariencia, adaptación.": "symbolizes change, appearance, and adaptation.",
@@ -79,7 +85,13 @@ export default function CardReading() {
   }
 }, []);
 
-  
+  useEffect(() => {
+  const nombreGuardado = localStorage.getItem("nombreUsuario");
+  if (nombreGuardado) {
+    setUsuario(nombreGuardado);
+  }
+}, []);
+
   useEffect(() => {
     if (cardIds.length !== 3) return; 
 
@@ -119,11 +131,36 @@ export default function CardReading() {
     fetchCards();
   }, [cardIds]); 
 
+  const savereading = () => {
+    if (!cards.past || !cards.present || !cards.future) {
+      alert("No cards to save yet!");
+      return;
+    }
+
+    const historial = JSON.parse(localStorage.getItem("historialTarot") || "[]");
+
+    const nuevaLectura = {
+      id: Date.now(), // id único
+      numeroTirada: historial.length + 1,
+      nombre: usuario || "Invitado",
+      fecha: new Date().toLocaleString(),
+      tirada: `PAST: ${cards.past.name} - ${cards.past.meaning}\n 
+      PRESENT: ${cards.present.name} - ${cards.present.meaning}\n 
+      FUTURE: ${cards.future.name} - ${cards.future.meaning}`,
+    };
+
+    historial.push(nuevaLectura);
+    localStorage.setItem("historialTarot", JSON.stringify(historial));
+    navigate("/historial");
+  };
+
+
   return (
     <div className="card-reading-container">
       <h1 className="intro-message">
-        The cards are ready to reflect your path
+        {usuario ? `${usuario}, the cards are ready to reflect your path` : "The cards are ready to reflect your path"}
       </h1>
+
 
       <div className="cards-grid">
         {cards.past && cards.present && cards.future && (
@@ -161,8 +198,16 @@ export default function CardReading() {
               </p>
             </div>
           </>
+          
         )}
       </div>
+      <div className="buttons-container">
+          <button className="gold-button" onClick={() => navigate("/card-selection")}> New Reading</button>
+          <button className="gold-button" onClick={savereading}>Save Reading</button>
+          <button className="gold-button" onClick={() => navigate("/historial")}> See reading history</button>
+      </div>
+
     </div>
   );
 }
+
