@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap');
+
+
+body {
+  background-color:  #0c0b10;
+}
+
+.card-reading-container {
+  font-family: "Cormorant Garamond", serif;
+  color: #e6e1e8;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.intro-message {
+  font-size: 1.85rem;
+  text-align: center;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--gold);
+  margin-bottom: 4rem;
+}
+
+/* CARTAS */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  align-items: stretch;
+}
+
+
+.clow-card {
+  border: 1px solid #D4AF37;
+  padding: 2rem 1.5rem 2.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(
+    180deg,
+    rgba(212, 175, 55, 0.05),
+    rgba(147, 92, 136, 0.03)
+  );
+}
+
+.clow-card h3 {
+  font-size: 1.85rem;
+  letter-spacing: 0.25em;
+  color: #935C88;
+  margin-bottom: 1.5rem;
+}
+
+.card-image {
+  width: 100%;
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.card-image img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.card-name {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #D4AF37;
+  margin-bottom: 0.75rem;
+}
+
+.message {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #e6e1e8;
+  margin-top: auto;
+}
+
+/* EFECTOS */
+.clow-card:hover {
+  transform: translateY(-12px);
+  border-color: #D4AF37;
+  box-shadow:
+    0 25px 50px rgba(212, 175, 55, 0.25),
+    0 0 25px rgba(212, 175, 55, 0.15);
+}
+
+.cards-grid:hover .clow-card:not(:hover) {
+  opacity: 0.45;
+}
+.clow-card:hover {
+  transform: translateY(-12px);
+  border-color: #D4AF37;
+  box-shadow:
+    0 25px 50px rgba(212, 175, 55, 0.25),
+    0 0 25px rgba(212, 175, 55, 0.15);
+}
+
+.cards-grid:hover .clow-card:not(:hover) {
+  opacity: 0.45;
+}
+
+.clow-card {
+  transition: 
+    transform 0.6s ease,
+    box-shadow 0.6s ease,
+    border-color 0.6s ease,
+    opacity 0.4s ease;
+}
+
+/* BOTONES */
+
+.buttons-container {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.gold-button {
+  background: linear-gradient(135deg, #D4AF37, #b8962e);
+  color: #1a1a1a;
+  border: none;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(212, 175, 55, 0.4);
+}
+
+.gold-button:hover {
+  background: linear-gradient(135deg, #e6c75a, #d4af37);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(212, 175, 55, 0.6);
+}
+
+.gold-button:active {
+  transform: scale(0.97);
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-image {
+    height: 320px;
+  }
+}
